@@ -11,6 +11,11 @@ on:
     tags: ["v*"]
   workflow_dispatch: {}
 
+# release 任务需要创建 Release 并上传附件，默认的只读 GITHUB_TOKEN 权限不够，
+# 这里显式开启 contents: write（仅限本 workflow 生成的临时 token，无需手动配置密钥）
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
@@ -83,3 +88,30 @@ jobs:
             release/*.zip
             release/*.blockmap
           if-no-files-found: error
+
+  # 只在推送 v* 格式的 tag 时执行，日常 push 到 master 只打包不发布。
+  # 依赖前两个 job 的产物，用 GITHUB_TOKEN（Actions 自动生成，无需手动配置密钥）创建 Release 并上传安装包。
+  release:
+    needs: [build-windows, build-macos]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下载 Windows 产物
+        uses: actions/download-artifact@v4
+        with:
+          name: video2frame-windows
+          path: artifacts/windows
+
+      - name: 下载 macOS 产物
+        uses: actions/download-artifact@v4
+        with:
+          name: video2frame-macos
+          path: artifacts/macos
+
+      - name: 创建 Release 并上传安装包
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/windows/*
+            artifacts/macos/*
+          generate_release_notes: true

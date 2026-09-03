@@ -53,7 +53,16 @@ npm run build:win
 npm run build:mac
 ```
 
-⚠️ **`build:mac` 无法在 Windows/Linux 上运行**，`electron-builder` 要求 macOS 打包必须在真机 macOS 环境执行（依赖 `codesign`/`hdiutil` 等系统工具）。如果你在 Windows 上开发，推送到 `main` 分支或打 `v*` tag 后，GitHub Actions（`.github/workflows/build.yml`）会自动在 macOS runner 上完成打包，构建产物可在 Actions 页面的 Artifacts 里下载。
+⚠️ **`build:mac` 无法在 Windows/Linux 上运行**，`electron-builder` 要求 macOS 打包必须在真机 macOS 环境执行（依赖 `codesign`/`hdiutil` 等系统工具）。如果你在 Windows 上开发，GitHub Actions（`.github/workflows/build.yml`）会自动处理：
+
+- 推送到 `master` 分支：自动打包 Windows + macOS 两个平台，产物在对应 Actions run 页面的 Artifacts 区块下载（默认保留 90 天，不出现在 Releases 里）
+- 推送 `v*` 格式的 tag（例如 `v1.0.0`）：打包后额外创建一个正式的 GitHub Release，把两个平台的安装包作为附件传上去，长期保留，出现在仓库首页 Releases 标签下
+
+发布新版本的流程：
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
 
 **打包后的应用已自动包含 FFmpeg**，用户下载安装包后可直接使用，无需任何额外配置。
 
