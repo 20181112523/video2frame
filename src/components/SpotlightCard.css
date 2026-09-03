@@ -1,0 +1,29 @@
+.spotlight-card {
+  position: relative;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-color: rgba(37, 99, 235, 0.14);
+}
+
+.spotlight-glow {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle 220px at var(--spot-x) var(--spot-y), var(--spot-color), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.spotlight-card:hover .spotlight-glow,
+.spotlight-card:focus-within .spotlight-glow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-glow {
+    display: none;
+  }
+}

@@ -1,0 +1,43 @@
+node_modules/
+dist/
+dist-electron/
+release/
+*.log
+npm-debug.log*
+yarn-error.log*
+.vite/
+*.asar
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 密钥/环境变量：本项目目前不需要，但一旦有人加了 .env 存密钥必须默认排除
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+
+# 本地 AI 编码工具配置（因人而异，不随代码库分发）
+.claude/
+.zcode/
+.impeccable/
+
+# FFmpeg 二进制体积过大（Windows 版单文件超过 GitHub 100MB 限制），
+# 不纳入版本控制，CI/本地构建前需从官方发布源下载到这些目录，
+# 参考 resources/FFMPEG_SETUP.md
+resources/ffmpeg/win/*
+resources/ffmpeg/mac/*
+!resources/ffmpeg/win/.gitkeep
+!resources/ffmpeg/mac/.gitkeep

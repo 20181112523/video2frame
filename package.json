@@ -1,0 +1,98 @@
+{
+  "name": "video2frame",
+  "version": "1.0.0",
+  "description": "跨平台视频帧提取工具 - 支持批量处理",
+  "main": "dist-electron/main.js",
+  "author": "jiahui.zheng",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && electron-builder",
+    "build:win": "vite build && electron-builder --win",
+    "build:mac": "vite build && electron-builder --mac",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-label": "^2.1.15",
+    "@radix-ui/react-progress": "^1.1.16",
+    "@radix-ui/react-radio-group": "^1.4.7",
+    "@radix-ui/react-select": "^2.3.7",
+    "@radix-ui/react-slider": "^1.4.7",
+    "@radix-ui/react-slot": "^1.3.3",
+    "@radix-ui/react-switch": "^1.3.7",
+    "@radix-ui/react-tabs": "^1.1.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "fluent-ffmpeg": "^2.1.3",
+    "ogl": "^1.0.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.5.4",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19",
+    "vite": "^5.0.0",
+    "vite-plugin-electron": "^0.28.0",
+    "vite-plugin-electron-renderer": "^0.14.0"
+  },
+  "build": {
+    "appId": "com.video2frame.app",
+    "productName": "Video2Frame",
+    "directories": {
+      "output": "release"
+    },
+    "electronLanguages": [
+      "zh-CN",
+      "en-US"
+    ],
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "resources/**/*",
+      "!resources/ffmpeg/**/*",
+      "!node_modules/fluent-ffmpeg/coverage/**/*",
+      "!node_modules/fluent-ffmpeg/doc/**/*",
+      "!node_modules/fluent-ffmpeg/tools/**/*",
+      "!node_modules/fluent-ffmpeg/OLD/**/*",
+      "!node_modules/fluent-ffmpeg/.vscode/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "resources/icon.ico",
+      "extraResources": [
+        {
+          "from": "resources/ffmpeg/win",
+          "to": "ffmpeg"
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "resources/icon.icns",
+      "category": "public.app-category.productivity",
+      "extraResources": [
+        {
+          "from": "resources/ffmpeg/mac",
+          "to": "ffmpeg"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
