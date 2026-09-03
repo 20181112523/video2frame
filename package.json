@@ -45,6 +45,7 @@
   "build": {
     "appId": "com.video2frame.app",
     "productName": "Video2Frame",
+    "publish": null,
     "directories": {
       "output": "release"
     },
