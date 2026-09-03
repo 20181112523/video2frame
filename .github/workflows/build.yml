@@ -7,7 +7,7 @@ name: Build
 # Windows 用静态编译的 gpl 构建（单个 exe 不依赖额外 DLL），与本地开发环境保持一致。
 on:
   push:
-    branches: [main]
+    branches: [master]
     tags: ["v*"]
   workflow_dispatch: {}
 
