@@ -2,6 +2,18 @@
 
 跨平台视频帧提取工具 - 支持 Windows 和 macOS，开箱即用。
 
+## 📸 界面截图
+
+| 视频切帧 | 预览 |
+|---|---|
+| ![视频切帧页面](./resources/screenshots/extract.png) | ![预览页面](./resources/screenshots/preview.png) |
+| 批量选择视频、配置导出参数（格式/质量/尺寸/帧率），实时查看处理进度和日志 | 图片序列播放器 + 视频时间范围可视化选择 |
+
+| 处理记录 | 设置 |
+|---|---|
+| ![处理记录页面](./resources/screenshots/history.png) | ![设置页面](./resources/screenshots/settings.png) |
+| 保留最近 100 次批处理历史，成功/失败状态一目了然 | 输出目录规则、窗口关闭行为（直接退出/最小化到托盘）等全局配置 |
+
 ## ✨ 特性
 
 - 🎬 **批量处理** - 一次选择多个视频文件，自动依次处理
