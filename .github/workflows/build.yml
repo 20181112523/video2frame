@@ -6,8 +6,10 @@ name: Build
 # 改为每次构建时从官方发布源临时下载到 resources/ffmpeg/，构建完成后随 runner 一起丢弃。
 # Windows 用静态编译的 gpl 构建（单个 exe 不依赖额外 DLL），与本地开发环境保持一致。
 on:
+  # 只在推送 v* 格式的 tag（如 v1.0.1）时触发打包和发版，
+  # 日常 push 到 master 不再跑 CI（省 runner 时长，也不会在 Actions 页面积累大量运行记录）。
+  # 手动触发（workflow_dispatch）保留，用于偶尔想验证打包是否正常时在 Actions 页面手动点。
   push:
-    branches: [master]
     tags: ["v*"]
   workflow_dispatch: {}
 
